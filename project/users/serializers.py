@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MainUser
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'is_superuser')
+        fields = ('id', 'username', 'email',)
         read_only_fields = ('id',)
         write_only_fields = ('password', 'first_name', 'last_name',)
 
