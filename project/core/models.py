@@ -20,7 +20,7 @@ class Review (models.Model):
     rating = models.IntegerField(default=1)
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=MAX_SIZE_SUMMARY)
-    ip_address = models.CharField(max_length=24)
+    ip_address = models.CharField(max_length=24, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     reviewer = models.ForeignKey(MainUser, on_delete=models.CASCADE, related_name='reviews')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_reviews')

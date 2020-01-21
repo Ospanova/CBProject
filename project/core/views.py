@@ -27,4 +27,4 @@ class ReviewViewSet(mixins.CreateModelMixin,
         return Review.reviews.created_by_user(self.request.user)
 
     def perform_create(self, serializer):
-        return serializer.save(reviewer=self.request.user)
+        return serializer.save(reviewer=self.request.user, ip_address=self.request.META.get('REMOTE_ADDR'))

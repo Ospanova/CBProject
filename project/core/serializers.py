@@ -14,7 +14,7 @@ class BaseReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'rating', 'title', 'summary', 'ip_address', 'created_at', 'reviewer', 'company', )
-        read_only_fields = ('id', 'created_at', 'reviewer',)
+        read_only_fields = ('id', 'created_at', 'reviewer', 'ip_address',)
 
     def validate_rating(self, rating):
         if rating not in range(1, 6):
