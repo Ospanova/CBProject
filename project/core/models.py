@@ -1,11 +1,14 @@
 from django.db import models
 from users.models import MainUser
 from core.managers import ReviewManager
+from utils.validators import validate_rating
+
 # Create your models here.
 
-MAX_SIZE_SUMMARY = 10000;
+MAX_SIZE_SUMMARY = 10000
 
-class Company (models.Model):
+
+class Company(models.Model):
     name = models.CharField(max_length=64)
     company_id = models.CharField(max_length=64)
 
@@ -16,15 +19,19 @@ class Company (models.Model):
     def __str__(self):
         return f'{self.name} : {self.company_id}'
 
-class Review (models.Model):
-    rating = models.IntegerField(default=1)
+
+class Review(models.Model):
+    rating = models.IntegerField(validators=[validate_rating])
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=MAX_SIZE_SUMMARY)
-    ip_address = models.CharField(max_length=24, null=True)
+    ip_address = models.CharField(max_length=24)
     created_at = models.DateTimeField(auto_now_add=True)
-    reviewer = models.ForeignKey(MainUser, on_delete=models.CASCADE, related_name='reviews')
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company_reviews')
+    reviewer = models.ForeignKey(MainUser, on_delete=models.CASCADE,
+                                 related_name='reviews')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE,
+                                related_name='company_reviews')
     reviews = ReviewManager()
+    objects = models.Manager()
 
     class Meta:
         verbose_name = 'Review'
@@ -32,4 +39,3 @@ class Review (models.Model):
 
     def __str__(self):
         return f'{self.reviewer}: {self.title}'
-

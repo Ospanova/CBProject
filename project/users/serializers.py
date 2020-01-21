@@ -2,8 +2,8 @@ from rest_framework import serializers
 from users.models import MainUser
 from django.db import transaction
 
-class UserSerializer(serializers.ModelSerializer):
 
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainUser
         fields = ('id', 'username', 'email',)

@@ -1,5 +1,4 @@
 from django.contrib.auth.models import AbstractUser
-from project import settings
 
 
 class MainUser(AbstractUser):
@@ -16,5 +15,4 @@ class MainUser(AbstractUser):
         return f'{self.id}: {self.username}'
 
     def save(self, *args, **kwargs):
-        created = self.pk is None
         super().save(*args, **kwargs)
